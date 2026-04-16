@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Apprendre les sons - Olivier Veillette (2026)</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1a1a1a;
+            overflow: hidden;
+        }
+
+        #scroll-container {
+            width: 100vw;
+            height: 100vh;
+            overflow: auto;
+            display: grid;
+            place-items: center;
+        }
+
+        #zoom-wrapper {
+            position: relative;
+            transform-origin: center center;
+            transition: transform 0.2s ease-in-out;
+            width: 1918px;
+            height: 1069px;
+            flex-shrink: 0;
+            margin: 50vh 50vw;
+        }
+
+        #image-container {
+            position: relative;
+            width: 1918px;
+            height: 1069px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            pointer-events: none;
+        }
+
+        .clickable-area {
+            position: absolute;
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        .zoom-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10000;
+        }
+
+        .zoom-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            border: none;
+            background: white;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="zoom-controls">
+        <button class="zoom-btn" onclick="changeZoom(0.1)">+</button>
+        <button class="zoom-btn" onclick="changeZoom(-0.1)">-</button>
+        <button class="zoom-btn" onclick="resetZoom()">⟲</button>
+    </div>
+
+    <div id="scroll-container">
+        <div id="zoom-wrapper">
+            <div id="image-container">
+                <img src="SONS_back.bmp" alt="Projet">
+
+                <div class="clickable-area" style="top: 0.09%; left: 0.09%; width: 11.00%; height: 7.25%;" onclick="playSound('sound1')"></div>
+                <div class="clickable-area" style="top: 0.09%; left: 12.1%; width: 4.0%; height: 7.25%;" onclick="playSound('sound2')"></div>
+                <div class="clickable-area" style="top: 0.09%; left: 17.00%; width: 15.35%; height: 7.25%;" onclick="playSound('sound3')"></div>
+                <div class="clickable-area" style="top: 0.09%; left: 33.50%; width: 15.35%; height: 7.25%;" onclick="playSound('sound4')"></div>
+                <div class="clickable-area" style="top: 0.09%; left: 50.0%; width: 15.35%; height: 7.25%;" onclick="playSound('sound5')"></div>
+		<div class="clickable-area" style="top: 0.09%; left: 67.0%; width: 15.35%; height: 7.25%;" onclick="playSound('sound6')"></div>
+		<div class="clickable-area" style="top: 0.09%; left: 83.5%; width: 15.35%; height: 7.25%;" onclick="playSound('sound7')"></div>
+
+                <div class="clickable-area" style="top: 16.8%; left: 0.09%; width: 15.3%; height: 7.0%;" onclick="playSound('sound8')"></div>
+                <div class="clickable-area" style="top: 16.8%; left: 17.00%; width: 15.3%; height: 7.0%;" onclick="playSound('sound9')"></div>
+                <div class="clickable-area" style="top: 16.8%; left: 33.50%; width: 15.3%; height: 7.0%;" onclick="playSound('sound10')"></div>
+                <div class="clickable-area" style="top: 16.8%; left: 50.0%; width: 15.3%; height: 7.0%;" onclick="playSound('sound11')"></div>
+		<div class="clickable-area" style="top: 16.8%; left: 67.0%; width: 15.3%; height: 7.0%;" onclick="playSound('sound12')"></div>
+		<div class="clickable-area" style="top: 16.8%; left: 83.5%; width: 15.3%; height: 7.0%;" onclick="playSound('sound13')"></div>
+
+                <div class="clickable-area" style="top: 32.9%; left: 0.09%; width: 15.35%; height: 7.0%;" onclick="playSound('sound14')"></div>
+                <div class="clickable-area" style="top: 32.9%; left: 17.00%; width: 15.35%; height: 7.0%;" onclick="playSound('sound15')"></div>
+                <div class="clickable-area" style="top: 32.9%; left: 33.50%; width: 15.35%; height: 7.0%;" onclick="playSound('sound16')"></div>
+                <div class="clickable-area" style="top: 32.9%; left: 50.0%; width: 15.35%; height: 7.0%;" onclick="playSound('sound17')"></div>
+		<div class="clickable-area" style="top: 32.9%; left: 67.0%; width: 15.35%; height: 7.0%;" onclick="playSound('sound18')"></div>
+		<div class="clickable-area" style="top: 32.9%; left: 83.5%; width: 15.35%; height: 7.0%;" onclick="playSound('sound19')"></div>
+                
+                <div class="clickable-area" style="top: 49.4%; left: 0.09%; width: 15.35%; height: 7.0%;" onclick="playSound('sound20')"></div>
+                <div class="clickable-area" style="top: 49.4%; left: 17.00%; width: 15.35%; height: 7.0%;" onclick="playSound('sound21')"></div>
+                <div class="clickable-area" style="top: 49.4%; left: 33.50%; width: 15.35%; height: 7.0%;" onclick="playSound('sound22')"></div>
+                <div class="clickable-area" style="top: 49.4%; left: 50.0%; width: 15.35%; height: 7.0%;" onclick="playSound('sound23')"></div>
+		<div class="clickable-area" style="top: 49.4%; left: 67.0%; width: 15.35%; height: 7.0%;" onclick="playSound('sound24')"></div>
+		<div class="clickable-area" style="top: 49.4%; left: 83.5%; width: 15.35%; height: 7.0%;" onclick="playSound('sound25')"></div>
+
+                <div class="clickable-area" style="top: 65.8%; left: 0.09%; width: 15.35%; height: 7.0%;" onclick="playSound('sound26')"></div>
+                <div class="clickable-area" style="top: 65.8%; left: 17.00%; width: 15.35%; height: 7.0%;" onclick="playSound('sound27')"></div>
+                <div class="clickable-area" style="top: 65.8%; left: 33.50%; width: 15.35%; height: 7.0%;" onclick="playSound('sound28')"></div>
+                <div class="clickable-area" style="top: 65.8%; left: 50.0%; width: 15.35%; height: 7.0%;" onclick="playSound('sound29')"></div>
+		<div class="clickable-area" style="top: 65.8%; left: 67.0%; width: 15.35%; height: 7.0%;" onclick="playSound('sound30')"></div>
+		<div class="clickable-area" style="top: 65.8%; left: 83.5%; width: 15.35%; height: 7.0%;" onclick="playSound('sound31')"></div>
+
+                <div class="clickable-area" style="top: 82.2%; left: 0.09%; width: 15.35%; height: 7.0%;" onclick="playSound('sound32')"></div>
+                <div class="clickable-area" style="top: 82.2%; left: 17.00%; width: 15.35%; height: 7.0%;" onclick="playSound('sound33')"></div>
+                <div class="clickable-area" style="top: 82.2%; left: 33.50%; width: 15.35%; height: 7.0%;" onclick="playSound('sound34')"></div>
+                <div class="clickable-area" style="top: 82.2%; left: 50.0%; width: 15.35%; height: 7.0%;" onclick="playSound('sound35')"></div>
+		<div class="clickable-area" style="top: 82.2%; left: 67.0%; width: 15.35%; height: 7.0%;" onclick="playSound('sound36')"></div>
+		<div class="clickable-area" style="top: 82.2%; left: 83.5%; width: 15.35%; height: 7.0%;" onclick="playSound('sound37')"></div>
+
+
+
+
+                <div class="clickable-area" style="top: 8.2%; left: 0.09%; width: 3.7%; height: 7.0%;" onclick="playSound('sound38')"></div>
+                <div class="clickable-area" style="top: 8.2%; left: 4.4%; width: 3.5%; height: 7.0%;" onclick="playSound('sound39')"></div>
+                <div class="clickable-area" style="top: 8.2%; left: 8.5%; width: 3.4%; height: 7.0%;" onclick="playSound('sound40')"></div>
+                <div class="clickable-area" style="top: 8.2%; left: 12.6%; width: 3.4%; height: 7.0%;" onclick="playSound('sound41')"></div>
+                <div class="clickable-area" style="top: 8.2%; left: 16.8%; width: 7.4%; height: 7.0%;" onclick="playSound('sound42')"></div>
+                <div class="clickable-area" style="top: 8.2%; left: 25.0%; width: 7.4%; height: 7.0%;" onclick="playSound('sound43')"></div>
+                <div class="clickable-area" style="top: 8.2%; left: 33.5%; width: 3.4%; height: 7.0%;" onclick="playSound('sound44')"></div>
+                <div class="clickable-area" style="top: 8.2%; left: 37.6%; width: 3.4%; height: 7.0%;" onclick="playSound('sound45')"></div>
+                <div class="clickable-area" style="top: 8.2%; left: 41.7%; width: 3.4%; height: 7.0%;" onclick="playSound('sound46')"></div>
+                <div class="clickable-area" style="top: 8.2%; left: 45.8%; width: 3.4%; height: 7.0%;" onclick="playSound('sound47')"></div>
+                <div class="clickable-area" style="top: 8.2%; left: 50.0%; width: 3.4%; height: 7.0%;" onclick="playSound('sound48')"></div>
+                <div class="clickable-area" style="top: 8.2%; left: 54.1%; width: 3.4%; height: 7.0%;" onclick="playSound('sound49')"></div>
+                <div class="clickable-area" style="top: 8.2%; left: 58.2%; width: 3.4%; height: 7.0%;" onclick="playSound('sound50')"></div>
+                <div class="clickable-area" style="top: 8.2%; left: 62.3%; width: 3.4%; height: 7.0%;" onclick="playSound('sound51')"></div>
+                <div class="clickable-area" style="top: 8.2%; left: 66.5%; width: 7.4%; height: 7.0%;" onclick="playSound('sound52')"></div>
+                <div class="clickable-area" style="top: 8.2%; left: 74.7%; width: 7.4%; height: 7.0%;" onclick="playSound('sound53')"></div>
+
+                <div class="clickable-area" style="top: 24.1%; left: 0.09%; width: 5.4%; height: 7.4%;" onclick="playSound('sound54')"></div>
+                <div class="clickable-area" style="top: 24.1%; left: 5.5%; width: 5.4%; height: 7.4%;" onclick="playSound('sound55')"></div>
+                <div class="clickable-area" style="top: 24.1%; left: 10.9%; width: 5.4%; height: 7.4%;" onclick="playSound('sound56')"></div>
+                <div class="clickable-area" style="top: 24.1%; left: 16.5%; width: 5.3%; height: 7.4%;" onclick="playSound('sound57')"></div>
+                <div class="clickable-area" style="top: 24.1%; left: 22.0%; width: 5.4%; height: 7.4%;" onclick="playSound('sound58')"></div>
+                <div class="clickable-area" style="top: 24.1%; left: 27.5%; width: 5.4%; height: 7.4%;" onclick="playSound('sound59')"></div>
+                <div class="clickable-area" style="top: 24.1%; left: 33.1%; width: 3.9%; height: 7.4%;" onclick="playSound('sound60')"></div>
+                <div class="clickable-area" style="top: 24.1%; left: 37.2%; width: 3.9%; height: 7.4%;" onclick="playSound('sound61')"></div>
+		<div class="clickable-area" style="top: 24.1%; left: 50.0%; width: 3.4%; height: 7.0%;" onclick="playSound('sound62')"></div>
+                <div class="clickable-area" style="top: 24.1%; left: 54.1%; width: 3.4%; height: 7.0%;" onclick="playSound('sound63')"></div>
+                <div class="clickable-area" style="top: 24.1%; left: 58.2%; width: 3.4%; height: 7.0%;" onclick="playSound('sound64')"></div>
+                <div class="clickable-area" style="top: 24.1%; left: 62.3%; width: 3.4%; height: 7.0%;" onclick="playSound('sound65')"></div>
+                <div class="clickable-area" style="top: 24.1%; left: 66.4%; width: 5.3%; height: 7.4%;" onclick="playSound('sound66')"></div>
+                <div class="clickable-area" style="top: 24.1%; left: 72.2%; width: 4.9%; height: 7.4%;" onclick="playSound('sound67')"></div>
+                <div class="clickable-area" style="top: 24.1%; left: 77.5%; width: 5.3%; height: 7.4%;" onclick="playSound('sound68')"></div>
+                <div class="clickable-area" style="top: 24.1%; left: 83.5%; width: 7.7%; height: 7.0%;" onclick="playSound('sound69')"></div>
+                <div class="clickable-area" style="top: 24.1%; left: 91.4%; width: 7.9%; height: 7.0%;" onclick="playSound('sound70')"></div>
+
+                <div class="clickable-area" style="top: 41.2%; left: 0.09%; width: 4.0%; height: 7.0%;" onclick="playSound('sound72')"></div>
+                <div class="clickable-area" style="top: 41.2%; left: 4.4%; width: 3.7%; height: 7.0%;" onclick="playSound('sound73')"></div>
+                <div class="clickable-area" style="top: 41.2%; left: 8.5%; width: 3.7%; height: 7.0%;" onclick="playSound('sound74')"></div>
+                <div class="clickable-area" style="top: 41.2%; left: 12.4%; width: 3.7%; height: 7.0%;" onclick="playSound('sound75')"></div>
+                <div class="clickable-area" style="top: 41.2%; left: 16.5%; width: 4.0%; height: 7.0%;" onclick="playSound('sound76')"></div>
+                <div class="clickable-area" style="top: 41.2%; left: 20.6%; width: 3.7%; height: 7.0%;" onclick="playSound('sound77')"></div>
+                <div class="clickable-area" style="top: 41.2%; left: 24.9%; width: 3.7%; height: 7.0%;" onclick="playSound('sound78')"></div>
+                <div class="clickable-area" style="top: 41.2%; left: 28.9%; width: 3.9%; height: 7.0%;" onclick="playSound('sound79')"></div>
+                <div class="clickable-area" style="top: 41.2%; left: 33.2%; width: 7.9%; height: 7.0%;" onclick="playSound('sound80')"></div>
+                <div class="clickable-area" style="top: 41.2%; left: 41.6%; width: 7.9%; height: 7.0%;" onclick="playSound('sound81')"></div>
+                <div class="clickable-area" style="top: 41.2%; left: 49.9%; width: 5.2%; height: 7.0%;" onclick="playSound('sound82')"></div>
+                <div class="clickable-area" style="top: 41.2%; left: 55.4%; width: 5.2%; height: 7.0%;" onclick="playSound('sound83')"></div>
+                <div class="clickable-area" style="top: 41.2%; left: 60.8%; width: 5.2%; height: 7.0%;" onclick="playSound('sound84')"></div>
+                <div class="clickable-area" style="top: 41.2%; left: 66.6%; width: 7.8%; height: 7.0%;" onclick="playSound('sound85')"></div>
+                <div class="clickable-area" style="top: 41.2%; left: 74.8%; width: 7.9%; height: 7.0%;" onclick="playSound('sound86')"></div>
+                <div class="clickable-area" style="top: 41.2%; left: 83.2%; width: 4.0%; height: 7.0%;" onclick="playSound('sound87')"></div>
+                <div class="clickable-area" style="top: 41.2%; left: 87.3%; width: 3.7%; height: 7.0%;" onclick="playSound('sound88')"></div>
+                <div class="clickable-area" style="top: 41.2%; left: 91.5%; width: 3.9%; height: 7.0%;" onclick="playSound('sound89')"></div>
+                <div class="clickable-area" style="top: 41.2%; left: 95.6%; width: 3.9%; height: 7.0%;" onclick="playSound('sound90')"></div>
+
+ 		<div class="clickable-area" style="top: 57.5%; left: 0.09%; width: 7.9%; height: 7.0%;" onclick="playSound('sound91')"></div>
+                <div class="clickable-area" style="top: 57.5%; left: 8.5%; width: 7.7%; height: 7.0%;" onclick="playSound('sound92')"></div>
+ 		<div class="clickable-area" style="top: 57.5%; left: 16.6%; width: 7.9%; height: 7.0%;" onclick="playSound('sound93')"></div>
+                <div class="clickable-area" style="top: 57.5%; left: 24.9%; width: 7.8%; height: 7.0%;" onclick="playSound('sound94')"></div>
+ 		<div class="clickable-area" style="top: 57.5%; left: 33.3%; width: 3.8%; height: 7.0%;" onclick="playSound('sound95')"></div>
+                <div class="clickable-area" style="top: 57.5%; left: 37.4%; width: 3.8%; height: 7.0%;" onclick="playSound('sound96')"></div>
+                <div class="clickable-area" style="top: 57.5%; left: 41.5%; width: 3.8%; height: 7.0%;" onclick="playSound('sound97')"></div>
+                <div class="clickable-area" style="top: 57.5%; left: 45.6%; width: 3.6%; height: 7.0%;" onclick="playSound('sound98')"></div>
+                <div class="clickable-area" style="top: 57.5%; left: 49.9%; width: 7.9%; height: 7.0%;" onclick="playSound('sound99')"></div>
+                <div class="clickable-area" style="top: 57.5%; left: 66.6%; width: 7.8%; height: 7.0%;" onclick="playSound('sound100')"></div>
+                <div class="clickable-area" style="top: 57.5%; left: 74.8%; width: 7.9%; height: 7.0%;" onclick="playSound('sound101')"></div>
+                <div class="clickable-area" style="top: 57.5%; left: 83.2%; width: 4.0%; height: 7.0%;" onclick="playSound('sound102')"></div>
+                <div class="clickable-area" style="top: 57.5%; left: 87.3%; width: 3.9%; height: 7.0%;" onclick="playSound('sound103')"></div>
+                <div class="clickable-area" style="top: 57.5%; left: 91.5%; width: 3.9%; height: 7.0%;" onclick="playSound('sound104')"></div>
+                <div class="clickable-area" style="top: 57.5%; left: 95.6%; width: 3.9%; height: 7.0%;" onclick="playSound('sound105')"></div>
+
+ 		<div class="clickable-area" style="top: 73.5%; left: 0.09%; width: 7.9%; height: 7.0%;" onclick="playSound('sound106')"></div>
+                <div class="clickable-area" style="top: 73.5%; left: 8.5%; width: 7.7%; height: 7.0%;" onclick="playSound('sound107')"></div>
+		<div class="clickable-area" style="top: 73.5%; left: 16.5%; width: 4.0%; height: 7.0%;" onclick="playSound('sound108')"></div>
+                <div class="clickable-area" style="top: 73.5%; left: 20.6%; width: 3.7%; height: 7.0%;" onclick="playSound('sound109')"></div>
+                <div class="clickable-area" style="top: 73.5%; left: 24.9%; width: 3.7%; height: 7.0%;" onclick="playSound('sound110')"></div>
+                <div class="clickable-area" style="top: 73.5%; left: 28.9%; width: 3.9%; height: 7.0%;" onclick="playSound('sound111')"></div>
+		<div class="clickable-area" style="top: 73.5%; left: 33.2%; width: 7.9%; height: 7.0%;" onclick="playSound('sound112')"></div>
+                <div class="clickable-area" style="top: 73.5%; left: 41.6%; width: 7.9%; height: 7.0%;" onclick="playSound('sound113')"></div>
+		<div class="clickable-area" style="top: 73.5%; left: 50.0%; width: 3.6%; height: 7.0%;" onclick="playSound('sound114')"></div>
+                <div class="clickable-area" style="top: 73.5%; left: 54.1%; width: 3.6%; height: 7.0%;" onclick="playSound('sound115')"></div>
+                <div class="clickable-area" style="top: 73.5%; left: 58.2%; width: 3.6%; height: 7.0%;" onclick="playSound('sound116')"></div>
+		<div class="clickable-area" style="top: 73.5%; left: 66.4%; width: 5.3%; height: 7.4%;" onclick="playSound('sound117')"></div>
+                <div class="clickable-area" style="top: 73.5%; left: 72.2%; width: 4.9%; height: 7.4%;" onclick="playSound('sound118')"></div>
+                <div class="clickable-area" style="top: 73.5%; left: 77.5%; width: 5.3%; height: 7.4%;" onclick="playSound('sound119')"></div>
+                <div class="clickable-area" style="top: 73.5%; left: 83.2%; width: 4.0%; height: 7.0%;" onclick="playSound('sound120')"></div>
+                <div class="clickable-area" style="top: 73.5%; left: 87.3%; width: 3.9%; height: 7.0%;" onclick="playSound('sound121')"></div>
+                <div class="clickable-area" style="top: 73.5%; left: 91.5%; width: 3.9%; height: 7.0%;" onclick="playSound('sound122')"></div>
+                <div class="clickable-area" style="top: 73.5%; left: 95.6%; width: 3.9%; height: 7.0%;" onclick="playSound('sound123')"></div>
+
+ 		<div class="clickable-area" style="top: 89.6%; left: 0.09%; width: 7.9%; height: 8.0%;" onclick="playSound('sound124')"></div>
+                <div class="clickable-area" style="top: 89.6%; left: 8.5%; width: 7.7%; height: 8.0%;" onclick="playSound('sound125')"></div>
+ 		<div class="clickable-area" style="top: 89.6%; left: 16.6%; width: 7.9%; height: 7.0%;" onclick="playSound('sound126')"></div>
+                <div class="clickable-area" style="top: 89.6%; left: 24.9%; width: 7.8%; height: 7.0%;" onclick="playSound('sound127')"></div>
+		<div class="clickable-area" style="top: 89.6%; left: 33.2%; width: 7.9%; height: 7.0%;" onclick="playSound('sound128')"></div>
+                <div class="clickable-area" style="top: 89.6%; left: 41.4%; width: 7.9%; height: 7.0%;" onclick="playSound('sound129')"></div>
+		<div class="clickable-area" style="top: 89.6%; left: 49.9%; width: 7.9%; height: 7.0%;" onclick="playSound('sound130')"></div>
+                <div class="clickable-area" style="top: 89.6%; left: 58.1%; width: 7.9%; height: 7.0%;" onclick="playSound('sound131')"></div>
+                <div class="clickable-area" style="top: 89.6%; left: 66.7%; width: 7.7%; height: 7.0%;" onclick="playSound('sound132')"></div>
+                <div class="clickable-area" style="top: 89.6%; left: 83.2%; width: 4.0%; height: 7.0%;" onclick="playSound('sound133')"></div>
+                <div class="clickable-area" style="top: 89.6%; left: 87.3%; width: 3.9%; height: 7.0%;" onclick="playSound('sound134')"></div>
+                <div class="clickable-area" style="top: 89.6%; left: 91.5%; width: 3.9%; height: 7.0%;" onclick="playSound('sound135')"></div>
+                <div class="clickable-area" style="top: 89.6%; left: 95.6%; width: 3.9%; height: 7.0%;" onclick="playSound('sound136')"></div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <audio id="sound1" src="a.wav" preload="auto"></audio>
+    <audio id="sound2" src="aa.wav" preload="auto"></audio>
+    <audio id="sound3" src="e.wav" preload="auto"></audio>
+    <audio id="sound4" src="i.wav" preload="auto"></audio>
+    <audio id="sound5" src="o.wav" preload="auto"></audio>
+    <audio id="sound6" src="u.wav" preload="auto"></audio>
+    <audio id="sound7" src="u.wav" preload="auto"></audio>
+    <audio id="sound8" src="ee.wav" preload="auto"></audio>
+    <audio id="sound9" src="eee.wav" preload="auto"></audio>
+    <audio id="sound10" src="eu.wav" preload="auto"></audio>
+    <audio id="sound11" src="s.wav" preload="auto"></audio>
+    <audio id="sound12" src="z.wav" preload="auto"></audio>
+    <audio id="sound13" src="un.wav" preload="auto"></audio>
+    <audio id="sound14" src="ou.wav" preload="auto"></audio>
+    <audio id="sound15" src="oi.wav" preload="auto"></audio>
+    <audio id="sound16" src="l.wav" preload="auto"></audio>
+    <audio id="sound17" src="f.wav" preload="auto"></audio>
+    <audio id="sound18" src="v.wav" preload="auto"></audio>
+    <audio id="sound19" src="in.wav" preload="auto"></audio>
+    <audio id="sound20" src="p.wav" preload="auto"></audio>
+    <audio id="sound21" src="t.wav" preload="auto"></audio>
+    <audio id="sound22" src="k.wav" preload="auto"></audio>
+    <audio id="sound23" src="b.wav" preload="auto"></audio>
+    <audio id="sound24" src="g.wav" preload="auto"></audio>
+    <audio id="sound25" src="r.wav" preload="auto"></audio>
+    <audio id="sound26" src="r.wav" preload="auto"></audio>
+    <audio id="sound27" src="an.wav" preload="auto"></audio>
+    <audio id="sound28" src="on.wav" preload="auto"></audio>
+    <audio id="sound29" src="l.wav" preload="auto"></audio>
+    <audio id="sound30" src="ch.wav" preload="auto"></audio>
+    <audio id="sound31" src="j.wav" preload="auto"></audio>
+    <audio id="sound32" src="d.wav" preload="auto"></audio>
+    <audio id="sound33" src="m.wav" preload="auto"></audio>
+    <audio id="sound34" src="n.wav" preload="auto"></audio>
+    <audio id="sound35" src="gn.wav" preload="auto"></audio>
+    <audio id="sound36" src="ui.wav" preload="auto"></audio>
+    <audio id="sound37" src="ill.wav" preload="auto"></audio>
+
+    <audio id="sound38" src="chat.wav" preload="auto"></audio>
+    <audio id="sound39" src="velo.wav" preload="auto"></audio>
+    <audio id="sound40" src="femme.wav" preload="auto"></audio>
+    <audio id="sound41" src="ane.wav" preload="auto"></audio>
+    <audio id="sound42" src="cerise.wav" preload="auto"></audio>
+    <audio id="sound43" src="monsieur.wav" preload="auto"></audio>
+    <audio id="sound44" src="souris.wav" preload="auto"></audio>
+    <audio id="sound45" src="stylo.wav" preload="auto"></audio>
+    <audio id="sound46" src="mais.wav" preload="auto"></audio>
+    <audio id="sound47" src="ile.wav" preload="auto"></audio>
+    <audio id="sound48" src="escargot.wav" preload="auto"></audio>
+    <audio id="sound49" src="taupe.wav" preload="auto"></audio>
+    <audio id="sound50" src="oiseau.wav" preload="auto"></audio>
+    <audio id="sound51" src="drole.wav" preload="auto"></audio>
+    <audio id="sound52" src="tortue.wav" preload="auto"></audio>
+    <audio id="sound53" src="flute.wav" preload="auto"></audio>
+
+    <audio id="sound54" src="etoile.wav" preload="auto"></audio>
+    <audio id="sound55" src="jouer.wav" preload="auto"></audio>
+    <audio id="sound56" src="nez.wav" preload="auto"></audio>
+    <audio id="sound57" src="sorciere.wav" preload="auto"></audio>
+    <audio id="sound58" src="tete.wav" preload="auto"></audio>
+    <audio id="sound59" src="maison.wav" preload="auto"></audio>
+    <audio id="sound60" src="feu.wav" preload="auto"></audio>
+    <audio id="sound61" src="noeud.wav" preload="auto"></audio>
+    <audio id="sound62" src="souris2.wav" preload="auto"></audio>
+    <audio id="sound63" src="cerise2.wav" preload="auto"></audio>
+    <audio id="sound64" src="glacon.wav" preload="auto"></audio>
+    <audio id="sound65" src="poisson.wav" preload="auto"></audio>
+    <audio id="sound66" src="valise.wav" preload="auto"></audio>
+    <audio id="sound67" src="zebre.wav" preload="auto"></audio>
+    <audio id="sound68" src="deuxieme.wav" preload="auto"></audio>
+    <audio id="sound69" src="brun.wav" preload="auto"></audio>
+    <audio id="sound70" src="parfum.wav" preload="auto"></audio>
+
+    <audio id="sound72" src="poule.wav" preload="auto"></audio>
+    <audio id="sound73" src="gouter.wav" preload="auto"></audio>
+    <audio id="sound74" src="football.wav" preload="auto"></audio>
+    <audio id="sound75" src="ou2.wav" preload="auto"></audio>
+    <audio id="sound76" src="roi.wav" preload="auto"></audio>
+    <audio id="sound77" src="noyau.wav" preload="auto"></audio>
+    <audio id="sound78" src="boite.wav" preload="auto"></audio>
+    <audio id="sound79" src="wapiti.wav" preload="auto"></audio>
+    <audio id="sound80" src="lapin.wav" preload="auto"></audio>
+    <audio id="sound81" src="ballon.wav" preload="auto"></audio>
+    <audio id="sound82" src="fee.wav" preload="auto"></audio>
+    <audio id="sound83" src="coffre.wav" preload="auto"></audio>
+    <audio id="sound84" src="telephone.wav" preload="auto"></audio>
+    <audio id="sound85" src="vache.wav" preload="auto"></audio>
+    <audio id="sound86" src="wagon.wav" preload="auto"></audio>
+    <audio id="sound87" src="lapin2.wav" preload="auto"></audio>
+    <audio id="sound88" src="timbre.wav" preload="auto"></audio>
+    <audio id="sound89" src="main.wav" preload="auto"></audio>
+    <audio id="sound90" src="faim.wav" preload="auto"></audio>
+
+    <audio id="sound91" src="loupe.wav" preload="auto"></audio>
+    <audio id="sound92" src="nappe.wav" preload="auto"></audio>
+    <audio id="sound93" src="tomate.wav" preload="auto"></audio>
+    <audio id="sound94" src="lunettes.wav" preload="auto"></audio>
+    <audio id="sound95" src="cadeau.wav" preload="auto"></audio>
+    <audio id="sound96" src="quille.wav" preload="auto"></audio>
+    <audio id="sound97" src="koala.wav" preload="auto"></audio>
+    <audio id="sound98" src="chorale.wav" preload="auto"></audio>
+    <audio id="sound99" src="balle.wav" preload="auto"></audio>
+    <audio id="sound100" src="garcon.wav" preload="auto"></audio>
+    <audio id="sound101" src="guepe.wav" preload="auto"></audio>
+    <audio id="sound102" src="arbre.wav" preload="auto"></audio>
+    <audio id="sound103" src="sucre.wav" preload="auto"></audio>
+    <audio id="sound104" src="fruits.wav" preload="auto"></audio>
+    <audio id="sound105" src="train.wav" preload="auto"></audio>
+
+    <audio id="sound106" src="rose.wav" preload="auto"></audio>
+    <audio id="sound107" src="verre.wav" preload="auto"></audio>
+    <audio id="sound108" src="enfant.wav" preload="auto"></audio>
+    <audio id="sound109" src="serpent.wav" preload="auto"></audio>
+    <audio id="sound110" src="tambour.wav" preload="auto"></audio>
+    <audio id="sound111" src="temps.wav" preload="auto"></audio>
+    <audio id="sound112" src="cochon.wav" preload="auto"></audio>
+    <audio id="sound113" src="pompier.wav" preload="auto"></audio>
+    <audio id="sound114" src="blanc.wav" preload="auto"></audio>
+    <audio id="sound115" src="cle.wav" preload="auto"></audio>
+    <audio id="sound116" src="fleur.wav" preload="auto"></audio>
+    <audio id="sound117" src="chien.wav" preload="auto"></audio>
+    <audio id="sound118" src="short.wav" preload="auto"></audio>
+    <audio id="sound119" src="schema.wav" preload="auto"></audio>
+    <audio id="sound120" src="jouet.wav" preload="auto"></audio>
+    <audio id="sound121" src="orange.wav" preload="auto"></audio>
+    <audio id="sound122" src="girafe.wav" preload="auto"></audio>
+    <audio id="sound123" src="gyrophare.wav" preload="auto"></audio>
+
+    <audio id="sound124" src="dent.wav" preload="auto"></audio>
+    <audio id="sound125" src="addition.wav" preload="auto"></audio>
+    <audio id="sound126" src="mouton.wav" preload="auto"></audio>
+    <audio id="sound127" src="pomme.wav" preload="auto"></audio>
+    <audio id="sound128" src="nid.wav" preload="auto"></audio>
+    <audio id="sound129" src="bonnet.wav" preload="auto"></audio>
+    <audio id="sound130" src="montagne.wav" preload="auto"></audio>
+    <audio id="sound131" src="panier.wav" preload="auto"></audio>
+    <audio id="sound132" src="pluie.wav" preload="auto"></audio>
+    <audio id="sound133" src="lion.wav" preload="auto"></audio>
+    <audio id="sound134" src="fille.wav" preload="auto"></audio>
+    <audio id="sound135" src="yeux.wav" preload="auto"></audio>
+    <audio id="sound136" src="fauteuil.wav" preload="auto"></audio>
+
+
+    <script>
+        let currentZoom = 1;
+        const scroller = document.getElementById('scroll-container');
+        const wrapper = document.getElementById('zoom-wrapper');
+
+        function applyZoom() {
+            wrapper.style.transform = `scale(${currentZoom})`;
+        }
+
+        function initZoom() {
+            const scaleX = window.innerWidth / 1918;
+            const scaleY = window.innerHeight / 1069;
+            currentZoom = Math.min(scaleX, scaleY);
+            applyZoom();
+            setTimeout(centerScroll, 50);
+        }
+
+        function centerScroll() {
+            const centerX = wrapper.offsetLeft + (wrapper.offsetWidth / 2) - (window.innerWidth / 2);
+            const centerY = wrapper.offsetTop + (wrapper.offsetHeight / 2) - (window.innerHeight / 2);
+            scroller.scrollTo(centerX, centerY);
+        }
+
+        function changeZoom(amount) {
+            currentZoom += amount;
+            if (currentZoom < 0.05) currentZoom = 0.05;
+            applyZoom();
+        }
+
+        function resetZoom() {
+            initZoom();
+        }
+
+        function playSound(soundId) {
+            const audio = document.getElementById(soundId);
+            if (audio) {
+                audio.pause();
+                audio.currentTime = 0;
+                audio.play().catch(e => {});
+            }
+        }
+
+        window.onload = initZoom;
+        window.onresize = initZoom;
+    </script>
+</body>
+</html>
